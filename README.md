@@ -15,7 +15,7 @@
 
 # 依赖
 
-```gradle
+``` gradle
 debugImplementation  'fairy.easy.httpcanary:httpcanary:{latestVersion}'
 ```
 
@@ -33,15 +33,15 @@ debugImplementation  'fairy.easy.httpcanary:httpcanary:{latestVersion}'
 
 ## 界面展示
 
-![](./img/img1.jpg)
-![](./img/img2.jpg)
+![](https://raw.githubusercontent.com/hhhaiai/Picture/main/img/202203251844004.jpg)
+![](https://raw.githubusercontent.com/hhhaiai/Picture/main/img/202203251845188.jpg)
 
 # 注意事项
 
 1. targetSdkVersion设置为27及以下
 2. 添加1.8版本
 
-```gradle
+``` gradle
  compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
