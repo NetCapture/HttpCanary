@@ -34,7 +34,7 @@ debugImplementation  'fairy.easy.httpcanary:httpcanary:{latestVersion}'
 ## 界面展示
 
 ![](https://raw.githubusercontent.com/hhhaiai/Picture/main/img/202203251844004.jpg)
-![](https://raw.githubusercontent.com/hhhaiai/Picture/main/img/202203251845188.jpg)
+![](https://raw.githubusercontent.com/hhhaiai/Picture/main/img/202203251846963.jpeg)
 
 # 注意事项
 
