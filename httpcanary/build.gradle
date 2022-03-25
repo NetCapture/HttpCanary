@@ -1,7 +1,11 @@
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-version = "2.0.1"
+//plugins {
+//    id 'com.android.library'
+//    id 'com.jfrog.bintray'
+//    id 'com.github.dcendents.android-maven'
+//}
 apply plugin: 'com.android.library'
+//apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 28
@@ -12,17 +16,43 @@ android {
         targetSdkVersion 28
         versionCode 201
         versionName "2.0.1"
-
-        consumerProguardFiles 'consumer-rules.pro'
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
 
+    dexOptions {
+        preDexLibraries false
+        maxProcessCount 8
+        javaMaxHeapSize "4g"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    lintOptions {
+        checkReleaseBuilds true
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable "UnusedResources", 'RestrictedApi', 'TypographyFractions','TypographyQuotes'
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
+        textOutput "stdout"
+        textReport false
+        check 'NewApi', 'InlinedApi'
+    }
+}
+
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }
 
 dependencies {
@@ -35,77 +65,78 @@ dependencies {
     api 'org.bouncycastle:bcprov-jdk15on:1.56'
     api 'org.bouncycastle:bcpkix-jdk15on:1.56'
     api 'com.google.guava:guava:24.1-jre'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 }
 
+//version = "2.0.1"
+//def siteUrl = 'https://github.com/guxiaonian/HttpCanary'
+//def gitUrl = 'https://github.com/guxiaonian/HttpCanary.git'
+//group = "fairy.easy.httpcanary"
+//install {
+//    repositories.mavenInstaller {
+//        pom {
+//            project {
+//                packaging 'jar'
+//                name 'Android'
+//                url siteUrl
+//                licenses {
+//                    license {
+//                        name 'The Apache Software License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id 'mobile'
+//                        name 'mobile'
+//                        email 'gunaonian@geetest.com'
+//                    }
+//                }
+//                scm {
+//                    connection gitUrl
+//                    developerConnection gitUrl
+//                    url siteUrl
+//                }
+//            }
+//        }
+//    }
+//}
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//afterEvaluate {
+//    javadoc.classpath += files(android.libraryVariants.collect { variant2 ->
+//        variant2.getJavaCompiler().classpath.files
+//    })
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//artifacts {
+//    archives javadocJar
+//    archives sourcesJar
+//}
 
-def siteUrl = 'https://github.com/guxiaonian/HttpCanary'
-def gitUrl = 'https://github.com/guxiaonian/HttpCanary.git'
-group = "fairy.easy.httpcanary"
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'jar'
-                name 'Android'
-                url siteUrl
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'mobile'
-                        name 'mobile'
-                        email 'gunaonian@geetest.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-afterEvaluate {
-    javadoc.classpath += files(android.libraryVariants.collect { variant2 ->
-        variant2.getJavaCompiler().classpath.files
-    })
-}
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user =  properties.getProperty("bintray.user")
-    key =  properties.getProperty("bintray.apikey")
-    configurations = ['archives']
-    pkg {
-        repo = "httpcanary"
-        name = "httpcanary"
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-    }
-}
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//bintray {
+//    user =  properties.getProperty("bintray.user")
+//    key =  properties.getProperty("bintray.apikey")
+//    configurations = ['archives']
+//    pkg {
+//        repo = "httpcanary"
+//        name = "httpcanary"
+//        websiteUrl = siteUrl
+//        vcsUrl = gitUrl
+//        licenses = ["Apache-2.0"]
+//        publish = true
+//    }
+//}

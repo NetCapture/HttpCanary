@@ -2,23 +2,41 @@
 
 buildscript {
     repositories {
+        mavenLocal()
+        mavenCentral()
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        jcenter { url 'https://maven.aliyun.com/repository/jcenter' }
+//        jcenter { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+////        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "com.android.tools.build:gradle:3.3.3"
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
 allprojects {
     repositories {
+        mavenLocal()
+        mavenCentral()
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        jcenter { url 'https://maven.aliyun.com/repository/jcenter' }
+//        jcenter { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+////        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         
     }
     tasks.withType(Javadoc) {
